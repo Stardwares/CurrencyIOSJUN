@@ -14,10 +14,10 @@ class CoursesCell: UITableViewCell {
     @IBOutlet weak var labelCurrencyCourse: UILabel!
     @IBOutlet weak var labelCurrencyFullName: UILabel!
     
-    func initCell(currency: Currency){
-        labelCurrencyName.text = currency.Nominal! + " " + currency.CharCode!
-        labelCurrencyCourse.text = currency.Value
-        labelCurrencyFullName.text = currency.Name
+    func initCell(currency: CurrencyData){
+        labelCurrencyName.text = currency.nominal! + " " + currency.charCode!
+        labelCurrencyCourse.text = currency.value
+        labelCurrencyFullName.text = currency.name
         
     }
     

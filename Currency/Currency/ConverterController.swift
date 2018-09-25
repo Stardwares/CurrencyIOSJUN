@@ -8,18 +8,14 @@
 
 import UIKit
 
-class ConverterController: UIViewController, UIScrollViewDelegate {
+class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextFieldDelegate */ {
     
-    
-    @IBOutlet weak var buttonInsert: UIButton!
     
     @IBOutlet weak var updateCurrencyLast: UITextView!
     @IBOutlet weak var buttonValOne: UIButton!
     @IBOutlet weak var buttonValTwo: UIButton!
-    
     @IBOutlet weak var textValueValOne: UITextField!
     @IBOutlet weak var textValueValTwo: UITextField!
-    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -28,20 +24,20 @@ class ConverterController: UIViewController, UIScrollViewDelegate {
     var frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var isEdit: Bool = true
     
-    
     @IBAction func clearButton(_ sender: Any) {
-        textValueValOne.text = nil
-        textValueValTwo.text = nil
+        textValueValOne.text = "0.00"
+        textValueValTwo.text = "0.00"
     }
     @IBAction func buttonActionInsert(_ sender: UIButton) {
         if isEdit == true {
-          textValueValOne.text = textValueValOne.text! + sender.title(for: UIControlState.normal)!
+            textValueValOne.text = Model.shared.addTextNumberFormat(textBefore: textValueValOne.text!, textButton: sender.title(for: UIControlState.normal)!)
+            textValOneEditingChange(textValueValOne)
         } else {
-          textValueValTwo.text = textValueValTwo.text! + sender.title(for: UIControlState.normal)!
+            textValueValTwo.text = Model.shared.addTextNumberFormat(textBefore: textValueValTwo.text!, textButton: sender.title(for: UIControlState.normal)!)
+            textValTwoEditingChange(textValueValTwo)
         }
         
     }
-    
     
     @IBAction func pushActionValOne(_ sender: Any) {
         let nc = storyboard?.instantiateViewController(withIdentifier: "selectedCurrencyNSID") as! UINavigationController
@@ -64,13 +60,12 @@ class ConverterController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func textValTwoEditingChange(_ sender: Any) {
         let amount = Double(textValueValTwo.text!)
-        textValueValOne.text = Model.shared.convert(amount: amount, flagFrom: false)
+        textValueValOne.text = String(format: "%.2f", Model.shared.convert(amount: amount, flagFrom: false))
     }
     
     @IBAction func textValOneEditingChange(_ sender: Any) {
         let amount = Double(textValueValOne.text!)
-        textValueValTwo.text = Model.shared.convert(amount: amount, flagFrom: true)
-        
+        textValueValTwo.text = String(format: "%.2f", Model.shared.convert(amount: amount, flagFrom: true))
     }
     
     @IBAction func TextOneValEdit(_ sender: Any) {
@@ -81,15 +76,11 @@ class ConverterController: UIViewController, UIScrollViewDelegate {
         isEdit = false
     }
     
-    
     @IBAction func buttonUpdateCurrency(_ sender: Any) {
         Model.shared.loadXMLFile()
         
         updateDateCurrency()
     }
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,8 +130,11 @@ class ConverterController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+  
+    
     override func viewDidAppear(_ animated: Bool) {
         Model.shared.loadXMLFile()
+        Model.shared.addCoreDate()
     }
     
     @objc func changePage(sender: AnyObject) -> () {

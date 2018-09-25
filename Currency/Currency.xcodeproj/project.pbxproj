@@ -16,7 +16,7 @@
 		5AF5ACDA2157D01D0014A673 /* CoursesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5ACD92157D01D0014A673 /* CoursesCell.swift */; };
 		5AF5ACDC2157D0700014A673 /* ConverterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5ACDB2157D0700014A673 /* ConverterController.swift */; };
 		5AF5ACDE2157D0D10014A673 /* SelectCurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5ACDD2157D0D10014A673 /* SelectCurrencyController.swift */; };
-		5AF5ACE02157D3210014A673 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5AF5ACDF2157D3210014A673 /* data.xml */; };
+		5AF5ACEB2157E6A50014A673 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5AF5ACEA2157E6A50014A673 /* data.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		5AF5ACD92157D01D0014A673 /* CoursesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCell.swift; sourceTree = "<group>"; };
 		5AF5ACDB2157D0700014A673 /* ConverterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterController.swift; sourceTree = "<group>"; };
 		5AF5ACDD2157D0D10014A673 /* SelectCurrencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrencyController.swift; sourceTree = "<group>"; };
-		5AF5ACDF2157D3210014A673 /* data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = data.xml; path = ../../../Documents/GitHub/currency/CoursesVal/CoursesVal/data.xml; sourceTree = "<group>"; };
+		5AF5ACEA2157E6A50014A673 /* data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = data.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 				5AF5ACD12157CF4D0014A673 /* Info.plist */,
 				5AF5ACC92157CF4B0014A673 /* Currency.xcdatamodeld */,
 				5AF5ACD72157CFD20014A673 /* Model.swift */,
-				5AF5ACDF2157D3210014A673 /* data.xml */,
+				5AF5ACEA2157E6A50014A673 /* data.xml */,
 			);
 			path = Currency;
 			sourceTree = "<group>";
@@ -146,7 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AF5ACD02157CF4D0014A673 /* LaunchScreen.storyboard in Resources */,
-				5AF5ACE02157D3210014A673 /* data.xml in Resources */,
+				5AF5ACEB2157E6A50014A673 /* data.xml in Resources */,
 				5AF5ACCD2157CF4D0014A673 /* Assets.xcassets in Resources */,
 				5AF5ACC82157CF4B0014A673 /* Main.storyboard in Resources */,
 			);

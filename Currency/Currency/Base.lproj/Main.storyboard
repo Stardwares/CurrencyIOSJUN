@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9t2-94-UzT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9t2-94-UzT">
                                 <rect key="frame" x="123" y="70" width="234" height="33"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -29,7 +29,7 @@
                                     <action selector="textValOneEditingChange:" destination="3Go-Ha-FTc" eventType="editingChanged" id="CHL-hB-0Tb"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hvD-bh-26I">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0.00" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hvD-bh-26I">
                                 <rect key="frame" x="122" y="104" width="235" height="33"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -208,7 +208,7 @@
                                     <constraint firstAttribute="height" constant="65" id="g4N-HC-2dP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title=".">
+                                <state key="normal" title="00">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -323,7 +323,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="buttonDone" destination="fQp-yH-quC" id="X9q-4f-RxN"/>
-                        <outlet property="buttonInsert" destination="rIG-Zu-Q8m" id="dD8-2R-vDc"/>
                         <outlet property="buttonValOne" destination="4wq-uf-QjH" id="3zL-mc-f9j"/>
                         <outlet property="buttonValTwo" destination="EGD-NQ-5bQ" id="2ad-QC-Pj9"/>
                         <outlet property="pageControl" destination="ogU-sg-SUe" id="4Dq-1H-Baz"/>

@@ -36,16 +36,18 @@ class Currency {
 class Model: NSObject, XMLParserDelegate,UITableViewDelegate {
     static let shared = Model()
     
+    var currencyCoreData = [CurrencyData]()
+    
     var currencies: [Currency] = []
     var currentDate: String = ""
     
     var oneCurrency: Currency = Currency.rouble()
     var twoCurrency: Currency = Currency.rouble()
     
-    func convert(amount: Double?, flagFrom: Bool) -> String{
+    func convert(amount: Double?, flagFrom: Bool) -> Double{
         var d: Double = 0
         if amount == nil {
-            return ""
+            return 0
         }
         if flagFrom == true {
             d = ((oneCurrency.valueDouble! / oneCurrency.nominalDouble!) / (twoCurrency.valueDouble! / twoCurrency.nominalDouble!)) * amount!
@@ -53,7 +55,12 @@ class Model: NSObject, XMLParserDelegate,UITableViewDelegate {
             d = ((twoCurrency.valueDouble! / twoCurrency.nominalDouble!) / (oneCurrency.valueDouble! / oneCurrency.nominalDouble!)) * amount!
         }
         
-        return String(d)
+        return d
+    }
+    
+    func addTextNumberFormat(textBefore: String, textButton: String) -> String{
+        let stringAfter = String(format: "%.2f", Double(String(Int(Double(textBefore)! * 100)) + textButton)! / 100)
+        return stringAfter
     }
     
     var pathForXML: String{
@@ -113,6 +120,9 @@ class Model: NSObject, XMLParserDelegate,UITableViewDelegate {
         let parser = XMLParser(contentsOf: urlForXML!)
         parser?.delegate = self
         parser?.parse()
+        
+        deleteAllInCoreDate()
+        saveCurrecyInCoreData()
         
         print("Данные обновлены!")
         
@@ -181,5 +191,54 @@ class Model: NSObject, XMLParserDelegate,UITableViewDelegate {
         }
     }
     
+    func saveCurrecyInCoreData(){
+        for index in currencies{
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            let curr = CurrencyData(entity: CurrencyData.entity(), insertInto: context)
+            
+            curr.setValue(index.CharCode, forKey: "charCode")
+            curr.setValue(index.Name, forKey: "name")
+            curr.setValue(index.Nominal, forKey: "nominal")
+            curr.setValue(index.nominalDouble, forKey: "nominalDouble")
+            curr.setValue(index.NumCode, forKey: "numCode")
+            curr.setValue(index.Value, forKey: "value")
+            curr.setValue(index.valueDouble, forKey: "valueDouble")
+            
+            do { try context.save()
+               currencyCoreData.append(curr)
+            } catch let error as NSError {
+                print("Could not save \(error)")
+            }
+        }
+    }
+    
+    func deleteAllInCoreDate(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        for index in currencyCoreData{
+            context.delete(index)
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            do { currencyCoreData = try context.fetch(CurrencyData.fetchRequest())
+                
+            } catch let error as NSError {
+                print("Could not delete \(error) ")
+            }
+            
+        }
+    }
+    
+    func addCoreDate(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do {
+           let result = try context.fetch(CurrencyData.fetchRequest())
+            currencyCoreData = result as! [CurrencyData]
+        } catch let error as NSError {
+            print("Could not add \(error)")
+        }
+    }
     
 }

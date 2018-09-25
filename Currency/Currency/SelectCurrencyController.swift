@@ -41,8 +41,9 @@ class SelectCurrencyController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellCurrency", for: indexPath) as! CoursesCell
         
         let currentCurrency: Currency = Model.shared.currencies[indexPath.row]
+        let currencyCoreData: CurrencyData = Model.shared.currencyCoreData[indexPath.row]
         
-        cell.initCell(currency: currentCurrency)
+        cell.initCell(currency: currencyCoreData)
         
         return cell
     }
