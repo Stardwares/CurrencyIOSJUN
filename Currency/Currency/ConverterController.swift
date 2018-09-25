@@ -50,14 +50,7 @@ class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextField
         (nc.viewControllers[0] as! SelectCurrencyController).flagCurrency = .twoCurrency
         present(nc, animated: true, completion: nil)
     }
-    
-    @IBOutlet weak var buttonDone: UIBarButtonItem!
-    
-    @IBAction func pushButtonAction(_ sender: Any) {
-        textValueValOne.resignFirstResponder()
-        navigationItem.rightBarButtonItem = nil
-    }
-    
+ 
     @IBAction func textValTwoEditingChange(_ sender: Any) {
         let amount = Double(textValueValTwo.text!)
         textValueValOne.text = String(format: "%.2f", Model.shared.convert(amount: amount, flagFrom: false))
@@ -69,16 +62,17 @@ class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextField
     }
     
     @IBAction func TextOneValEdit(_ sender: Any) {
+        textValueValOne.resignFirstResponder()
         isEdit = true
     }
     
     @IBAction func TextTwoValEdit(_ sender: Any) {
+        textValueValTwo.resignFirstResponder()
         isEdit = false
     }
     
     @IBAction func buttonUpdateCurrency(_ sender: Any) {
         Model.shared.loadXMLFile()
-        
         updateDateCurrency()
     }
     
@@ -107,7 +101,6 @@ class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextField
         self.scrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width - 35) * 3, height: self.scrollView.frame.size.height)
         pageControl.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
         
-        
         textValueValOne.delegate = self
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "startLoadingXML"), object: nil, queue: nil) { (notification) in
@@ -117,20 +110,14 @@ class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextField
                 self.navigationItem.rightBarButtonItem?.customView = activityIndicator
             }
         }
-        
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "dataRefreshed"), object: nil, queue: nil) { (notification) in
             DispatchQueue.main.async {
                 self.navigationItem.title = Model.shared.currentDate
             }
         }
-        
         navigationItem.title = Model.shared.currentDate
-        
-        //    Model.shared.loadXMLFile()
-        // Do any additional setup after loading the view.
     }
-    
-  
     
     override func viewDidAppear(_ animated: Bool) {
         Model.shared.loadXMLFile()
@@ -151,7 +138,6 @@ class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextField
     func updateDateCurrency() {
         let df = DateFormatter()
         df.dateFormat = "dd-MM-yyyy HH:mm:ss"
-        
         updateCurrencyLast.text = "Последнее обновление курсов:" + "\n" + df.string(from: NSDate() as Date)
     }
     
@@ -166,8 +152,6 @@ class ConverterController: UIViewController, UIScrollViewDelegate/*, UITextField
         buttonValOne.setTitle(Model.shared.oneCurrency.CharCode, for: UIControlState.normal)
         buttonValTwo.setTitle(Model.shared.twoCurrency.CharCode, for: UIControlState.normal)
     }
-    
-    
 }
 
 extension ConverterController: UITextFieldDelegate {

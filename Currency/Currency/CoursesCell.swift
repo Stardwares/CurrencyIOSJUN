@@ -18,7 +18,6 @@ class CoursesCell: UITableViewCell {
         labelCurrencyName.text = currency.nominal! + " " + currency.charCode!
         labelCurrencyCourse.text = currency.value
         labelCurrencyFullName.text = currency.name
-        
     }
     
     override func awakeFromNib() {

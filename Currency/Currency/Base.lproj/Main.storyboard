@@ -322,7 +322,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="buttonDone" destination="fQp-yH-quC" id="X9q-4f-RxN"/>
                         <outlet property="buttonValOne" destination="4wq-uf-QjH" id="3zL-mc-f9j"/>
                         <outlet property="buttonValTwo" destination="EGD-NQ-5bQ" id="2ad-QC-Pj9"/>
                         <outlet property="pageControl" destination="ogU-sg-SUe" id="4Dq-1H-Baz"/>
@@ -333,11 +332,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJm-rm-ta7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <barButtonItem style="done" systemItem="done" id="fQp-yH-quC">
-                    <connections>
-                        <action selector="pushButtonAction:" destination="3Go-Ha-FTc" id="yT0-RF-Kdm"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1190" y="452"/>
         </scene>

@@ -192,41 +192,45 @@ class Model: NSObject, XMLParserDelegate,UITableViewDelegate {
     }
     
     func saveCurrecyInCoreData(){
-        for index in currencies{
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            
-            let curr = CurrencyData(entity: CurrencyData.entity(), insertInto: context)
-            
-            curr.setValue(index.CharCode, forKey: "charCode")
-            curr.setValue(index.Name, forKey: "name")
-            curr.setValue(index.Nominal, forKey: "nominal")
-            curr.setValue(index.nominalDouble, forKey: "nominalDouble")
-            curr.setValue(index.NumCode, forKey: "numCode")
-            curr.setValue(index.Value, forKey: "value")
-            curr.setValue(index.valueDouble, forKey: "valueDouble")
-            
-            do { try context.save()
-               currencyCoreData.append(curr)
-            } catch let error as NSError {
-                print("Could not save \(error)")
+        DispatchQueue.main.async {
+            for index in self.currencies{
+                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                
+                let curr = CurrencyData(entity: CurrencyData.entity(), insertInto: context)
+                
+                curr.setValue(index.CharCode, forKey: "charCode")
+                curr.setValue(index.Name, forKey: "name")
+                curr.setValue(index.Nominal, forKey: "nominal")
+                curr.setValue(index.nominalDouble, forKey: "nominalDouble")
+                curr.setValue(index.NumCode, forKey: "numCode")
+                curr.setValue(index.Value, forKey: "value")
+                curr.setValue(index.valueDouble, forKey: "valueDouble")
+                
+                do { try context.save()
+                   self.currencyCoreData.append(curr)
+                } catch let error as NSError {
+                    print("Could not save \(error)")
+                }
             }
         }
     }
     
     func deleteAllInCoreDate(){
+        DispatchQueue.main.async {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        for index in currencyCoreData{
+        for index in self.currencyCoreData{
             context.delete(index)
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
-            do { currencyCoreData = try context.fetch(CurrencyData.fetchRequest())
+            do { self.currencyCoreData = try context.fetch(CurrencyData.fetchRequest())
                 
             } catch let error as NSError {
                 print("Could not delete \(error) ")
             }
             
+        }
         }
     }
     
